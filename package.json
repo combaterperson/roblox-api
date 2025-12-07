@@ -12,6 +12,8 @@
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.1",
-    "express": "^5.2.1"
-  }
+    "express": "^5.2.1",
+    "noblox.js": "^6.2.0"
 }
+
+  }
