@@ -20,9 +20,9 @@ const SECRET_KEY = "JK2hu2jbwu2UJK12IGU_s";
 
 
 app.post("/api/setRank", async (req, res) => {
-    const { apiKey, userId, Rank, Group } = req.body;
+    const { apiKey, userId, rankId, groupId } = req.body;
 
-    if (key !== SECRET_KEY) {
+    if (apiKey !== SECRET_KEY) {
         return res.status(403).json({ success: false, message: "Invalid API key" });
     }
 
