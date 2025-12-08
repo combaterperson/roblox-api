@@ -7,22 +7,7 @@ app.use(bodyParser.json());
 
 const SECRET_KEY = "JK2hu2jbwu2UJK12IGU_s";
 
-<<<<<<< HEAD
-=======
 
-(async () => {
-    try {
-        await noblox.setCookie(process.env.ROBLOX_COOKIE);
-        console.log("Logged into Roblox successfully!");
-    } catch (err) {
-        console.error("Failed to login:", err);
-    }
-})();
-
-
-app.post("/api/setRank", async (req, res) => {
-    const { apiKey, userId, rankId, groupId } = req.body;
->>>>>>> fb04fb271cfee5801a74feeebff89e42f8627770
 
 (async () => {
     try {
@@ -45,11 +30,9 @@ app.post("/api/setRank", async (req, res) => {
 
     try {
         const result = await noblox.setRank(targetGroupId, userId, rankId);
-<<<<<<< HEAD
-        console.log(`Set user ${userId} in group ${targetGroupId} to rank ${Rank}`);
-=======
+
         console.log(`Set user ${userId} in group ${targetGroupId} to rank ${rankId}`);
->>>>>>> fb04fb271cfee5801a74feeebff89e42f8627770
+
         return res.json({
             success: true,
             message: `Rank updated for user ${userId}`,
