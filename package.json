@@ -15,6 +15,13 @@
     "body-parser": "^2.2.1",
     "express": "^5.2.1",
     "noblox.js": "^6.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/combaterperson/roblox-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/combaterperson/roblox-api/issues"
+  },
+  "homepage": "https://github.com/combaterperson/roblox-api#readme"
 }
-
-  }
