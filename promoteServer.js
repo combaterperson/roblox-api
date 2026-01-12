@@ -35,13 +35,26 @@ app.post("/api/promote", async (req, res) => {
 
         return res.json({ success: true, newRank, result });
     } catch (err) {
-        console.error("Failed to promote:", err.message);
+        console.error("Failed to set rank:", err);
+
+        let userMessage = "Unknown error occurred";
+
+        if (err.message.includes("401") || err.message.toLowerCase().includes("unauthorized")) {
+            userMessage = "Bot cookie is invalid or does not have permission";
+        } else if (err.message.toLowerCase().includes("user not found") || err.message.toLowerCase().includes("not in group")) {
+            userMessage = "Target user does not exist or is not in the group";
+        } else if (err.message.toLowerCase().includes("role does not exist")) {
+            userMessage = "The rankId provided is invalid (must be a Role ID, not a rank number)";
+        } else if (err.message.toLowerCase().includes("cannot set rank")) {
+            userMessage = "Bot does not have permission to set this rank (bot must outrank target role)";
+        }
+
         return res.status(500).json({ success: false, message: err.message });
     }
 });
 
 // Start server
-const PORT = process.env.PORT || 3001; // can use a different port from your setRank server
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Promote server running on port ${PORT}`);
 });
