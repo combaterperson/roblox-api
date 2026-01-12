@@ -39,10 +39,24 @@ app.post("/api/setRank", async (req, res) => {
             result: result
         });
     } catch (err) {
-        console.error("Failed to set rank:", err.message);
+        console.error("Failed to set rank:", err);
+
+        let userMessage = "Unknown error occurred";
+
+        if (err.message.includes("401") || err.message.toLowerCase().includes("unauthorized")) {
+            userMessage = "Bot cookie is invalid or does not have permission";
+        } else if (err.message.toLowerCase().includes("user not found") || err.message.toLowerCase().includes("not in group")) {
+            userMessage = "Target user does not exist or is not in the group";
+        } else if (err.message.toLowerCase().includes("role does not exist")) {
+            userMessage = "The rankId provided is invalid (must be a Role ID, not a rank number)";
+        } else if (err.message.toLowerCase().includes("cannot set rank")) {
+            userMessage = "Bot does not have permission to set this rank (bot must outrank target role)";
+        }
+
         return res.status(500).json({
             success: false,
-            message: err.message
+            message: userMessage,
+            fullError: err  // optional, can remove in production
         });
     }
 });
